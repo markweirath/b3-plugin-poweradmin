@@ -21,6 +21,7 @@
 # 1.0.1 - 1.1.0 : Added serverside CoD2 mod and new functionality.
 # 1.3.1 : New command !pamono to remove colorcodes from playernames.
 # 1.3.2 : New command !panades to grant nades to a player.
+# 1.3.3 : Send rcon result to client on !paexec and !pamaprestart
 #
 
 __version__ = '1.3.2'
@@ -89,10 +90,11 @@ class PoweradminPlugin(b3.plugin.Plugin):
     else:
       if re.match('^[a-z0-9_.]+.cfg$', data, re.I):
         self.debug('Executing configfile = [%s]', data)
-        self.console.write('exec %s' % data)
+        result = self.console.write('exec %s' % data)
+        cmd.sayLoudOrPM(client, result)
       else:
         self.error('%s is not a valid configfile', data)
-
+        return False
     return True
 
 
@@ -101,7 +103,8 @@ class PoweradminPlugin(b3.plugin.Plugin):
     Restart the current map.
     (You can safely use the command without the 'pa' at the beginning)
     """
-    self.console.write('map_restart')
+    result = self.console.write('map_restart')
+    cmd.sayLoudOrPM(client, result)
     return True
 
 
