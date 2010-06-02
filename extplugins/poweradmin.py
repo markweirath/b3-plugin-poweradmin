@@ -22,9 +22,10 @@
 # 1.3.1 : New command !pamono to remove colorcodes from playernames.
 # 1.3.2 : New command !panades to grant nades to a player.
 # 1.3.3 : Send rcon result to client on !paexec and !pamaprestart
+# 1.3.4 : Typo fixed
 #
 
-__version__ = '1.3.2'
+__version__ = '1.3.4'
 __author__  = 'xlr8or'
 
 import b3, re
@@ -509,7 +510,7 @@ class PoweradminPlugin(b3.plugin.Plugin):
       team = 'spectator'
     
     if team in ('allies','axis','spectator'):
-      sclient.message('^3Your are forced to: ^7%s' % (team))
+      sclient.message('^3You are forced to: ^7%s' % (team))
     else:
       client.message('^7Invalid or missing data, try !help paforce')
       return False
